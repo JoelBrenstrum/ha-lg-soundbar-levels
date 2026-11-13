@@ -1,0 +1,23 @@
+{
+  "entity": {
+    "number": {
+      "woofer_level": {
+        "default": "mdi:speaker"
+      },
+      "center_level": {
+        "default": "mdi:account-voice"
+      },
+      "top_level": {
+        "default": "mdi:speaker-wireless"
+      },
+      "rear_level": {
+        "default": "mdi:surround-sound"
+      }
+    },
+    "switch": {
+      "night_time": {
+        "default": "mdi:weather-night"
+      }
+    }
+  }
+}

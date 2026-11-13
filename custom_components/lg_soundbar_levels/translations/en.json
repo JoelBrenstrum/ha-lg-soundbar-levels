@@ -1,0 +1,46 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to an LG soundbar",
+        "description": "The soundbar must be on the same network. Give it a fixed address in your router so it can be found again.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        },
+        "data_description": {
+          "host": "The soundbar's IP address or hostname.",
+          "port": "Leave as 9741 unless you know otherwise."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Couldn't reach a soundbar at that address.",
+      "no_levels": "The soundbar answered but didn't report any speaker levels."
+    },
+    "abort": {
+      "already_configured": "This soundbar is already set up."
+    }
+  },
+  "entity": {
+    "number": {
+      "woofer_level": {
+        "name": "Woofer level"
+      },
+      "center_level": {
+        "name": "Center level"
+      },
+      "top_level": {
+        "name": "Top level"
+      },
+      "rear_level": {
+        "name": "Rear level"
+      }
+    },
+    "switch": {
+      "night_time": {
+        "name": "Night time"
+      }
+    }
+  }
+}
