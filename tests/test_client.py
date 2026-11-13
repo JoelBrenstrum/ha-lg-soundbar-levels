@@ -35,7 +35,7 @@ async def test_set_sends_the_data_and_reports_the_confirmation(soundbar: FakeSou
     finally:
         await client.close()
     assert soundbar.received[-1] == {"cmd": "set", "msg": SETTINGS, "data": {"i_woofer_level": 0}}
-    assert soundbar.settings["i_woofer_level"] == 0
+    assert soundbar.messages[SETTINGS]["i_woofer_level"] == 0
 
 
 async def test_reconnects_after_the_soundbar_drops_the_connection(soundbar: FakeSoundbar) -> None:

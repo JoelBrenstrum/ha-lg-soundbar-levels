@@ -24,6 +24,9 @@
   },
   "entity": {
     "number": {
+      "volume": {
+        "name": "Volume"
+      },
       "woofer_level": {
         "name": "Woofer level"
       },
@@ -31,15 +34,77 @@
         "name": "Center level"
       },
       "top_level": {
-        "name": "Top level"
+        "name": "Overhead level"
       },
       "rear_level": {
         "name": "Rear level"
+      },
+      "dialogue_level": {
+        "name": "Dialogue level"
+      },
+      "bass": {
+        "name": "Bass"
+      },
+      "treble": {
+        "name": "Treble"
+      },
+      "av_sync": {
+        "name": "AV sync"
+      }
+    },
+    "select": {
+      "input": {
+        "name": "Input"
+      },
+      "sound_effect": {
+        "name": "Sound effect"
+      },
+      "sleep_timer": {
+        "name": "Sleep timer"
       }
     },
     "switch": {
+      "mute": {
+        "name": "Mute"
+      },
       "night_time": {
         "name": "Night time"
+      },
+      "auto_volume": {
+        "name": "Auto volume"
+      },
+      "drc": {
+        "name": "Dynamic range compression"
+      },
+      "neural_x": {
+        "name": "Neural:X"
+      },
+      "rear_speakers": {
+        "name": "Rear speakers"
+      },
+      "auto_power": {
+        "name": "Auto power"
+      },
+      "tv_remote": {
+        "name": "TV remote"
+      }
+    },
+    "update": {
+      "firmware": {
+        "name": "Firmware"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Soundbar details",
+        "data": {
+          "model": "Model"
+        },
+        "data_description": {
+          "model": "Shown on the device page when the soundbar doesn't report its own model, for example SN8Y."
+        }
       }
     }
   }

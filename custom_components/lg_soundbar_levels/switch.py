@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Any
 
 from homeassistant.components.switch import SwitchEntity
-from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
@@ -26,10 +25,8 @@ async def async_setup_entry(
 
 
 class SoundbarToggleSwitch(SoundbarEntity, SwitchEntity):
-    _attr_entity_category = EntityCategory.CONFIG
-
     def __init__(self, coordinator: SoundbarCoordinator, toggle: Toggle) -> None:
-        super().__init__(coordinator, toggle.key)
+        super().__init__(coordinator, toggle.key, toggle.config)
         self.toggle = toggle
 
     @property
@@ -41,7 +38,7 @@ class SoundbarToggleSwitch(SoundbarEntity, SwitchEntity):
         return toggle_state(self.coordinator.data or {}, self.toggle)
 
     async def async_turn_on(self, **kwargs: Any) -> None:
-        await self.coordinator.async_set_settings({self.toggle.field: True})
+        await self.coordinator.async_set(self.toggle.message, {self.toggle.field: True})
 
     async def async_turn_off(self, **kwargs: Any) -> None:
-        await self.coordinator.async_set_settings({self.toggle.field: False})
+        await self.coordinator.async_set(self.toggle.message, {self.toggle.field: False})

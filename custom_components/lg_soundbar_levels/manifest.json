@@ -1,12 +1,14 @@
 {
   "domain": "lg_soundbar_levels",
   "name": "LG Soundbar Levels",
-  "codeowners": ["@JoelBrenstrum"],
+  "codeowners": [
+    "@JoelBrenstrum"
+  ],
   "config_flow": true,
   "documentation": "https://github.com/JoelBrenstrum/ha-lg-soundbar-levels",
   "integration_type": "device",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/JoelBrenstrum/ha-lg-soundbar-levels/issues",
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.2.0"
 }

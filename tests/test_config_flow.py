@@ -8,6 +8,7 @@ import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.lg_soundbar_levels.const import DOMAIN
+from custom_components.lg_soundbar_levels.protocol import SETTINGS
 
 from .conftest import FakeSoundbar
 
@@ -50,7 +51,7 @@ async def test_shows_an_error_when_the_soundbar_is_unreachable(
 async def test_shows_an_error_when_no_levels_are_reported(
     hass: HomeAssistant, soundbar: FakeSoundbar
 ) -> None:
-    soundbar.settings = {"b_night_time": False}
+    soundbar.messages[SETTINGS] = {"b_night_time": False}
 
     result = await submit(hass, soundbar.port)
 
@@ -64,3 +65,15 @@ async def test_aborts_when_the_host_is_already_set_up(hass: HomeAssistant, sound
 
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "already_configured"
+
+
+async def test_options_set_the_model(hass: HomeAssistant) -> None:
+    entry = MockConfigEntry(domain=DOMAIN, data={CONF_HOST: "127.0.0.1", CONF_PORT: 9741})
+    entry.add_to_hass(hass)
+
+    result = await hass.config_entries.options.async_init(entry.entry_id)
+    assert result["type"] is FlowResultType.FORM
+    result = await hass.config_entries.options.async_configure(result["flow_id"], {"model": " SN8Y "})
+
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+    assert entry.options == {"model": "SN8Y"}

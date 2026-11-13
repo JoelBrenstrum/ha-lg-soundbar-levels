@@ -1,6 +1,9 @@
 {
   "entity": {
     "number": {
+      "volume": {
+        "default": "mdi:volume-high"
+      },
       "woofer_level": {
         "default": "mdi:speaker"
       },
@@ -12,11 +15,58 @@
       },
       "rear_level": {
         "default": "mdi:surround-sound"
+      },
+      "dialogue_level": {
+        "default": "mdi:account-voice"
+      },
+      "bass": {
+        "default": "mdi:music-clef-bass"
+      },
+      "treble": {
+        "default": "mdi:music-clef-treble"
+      },
+      "av_sync": {
+        "default": "mdi:timer-sync-outline"
+      }
+    },
+    "select": {
+      "input": {
+        "default": "mdi:import"
+      },
+      "sound_effect": {
+        "default": "mdi:equalizer"
+      },
+      "sleep_timer": {
+        "default": "mdi:timer-outline"
       }
     },
     "switch": {
+      "mute": {
+        "default": "mdi:volume-high",
+        "state": {
+          "on": "mdi:volume-off"
+        }
+      },
       "night_time": {
         "default": "mdi:weather-night"
+      },
+      "auto_volume": {
+        "default": "mdi:volume-equal"
+      },
+      "drc": {
+        "default": "mdi:arrow-collapse-vertical"
+      },
+      "neural_x": {
+        "default": "mdi:surround-sound"
+      },
+      "rear_speakers": {
+        "default": "mdi:speaker-multiple"
+      },
+      "auto_power": {
+        "default": "mdi:power"
+      },
+      "tv_remote": {
+        "default": "mdi:remote-tv"
       }
     }
   }

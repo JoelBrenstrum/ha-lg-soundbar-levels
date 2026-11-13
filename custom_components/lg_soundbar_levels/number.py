@@ -1,13 +1,21 @@
 from __future__ import annotations
 
 from homeassistant.components.number import NumberEntity, NumberMode
-from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from .coordinator import SoundbarConfigEntry, SoundbarCoordinator
 from .entity import SoundbarEntity
-from .protocol import LEVELS, Level, LevelRange, level_range, to_db, to_raw
+from .protocol import (
+    LEVELS,
+    Level,
+    LevelRange,
+    display_range,
+    level_available,
+    level_range,
+    to_display,
+    to_raw,
+)
 
 
 async def async_setup_entry(
@@ -24,14 +32,13 @@ async def async_setup_entry(
 
 
 class SoundbarLevelNumber(SoundbarEntity, NumberEntity):
-    _attr_entity_category = EntityCategory.CONFIG
     _attr_mode = NumberMode.SLIDER
-    _attr_native_step = 1
-    _attr_native_unit_of_measurement = "dB"
 
     def __init__(self, coordinator: SoundbarCoordinator, level: Level) -> None:
-        super().__init__(coordinator, f"{level.key}_level")
+        super().__init__(coordinator, level.key, level.config)
         self.level = level
+        self._attr_native_step = level.scale
+        self._attr_native_unit_of_measurement = level.unit
         self._attr_entity_registry_enabled_default = level.enabled_by_default
 
     @property
@@ -40,23 +47,25 @@ class SoundbarLevelNumber(SoundbarEntity, NumberEntity):
 
     @property
     def available(self) -> bool:
-        return super().available and self.range is not None
+        return super().available and level_available(self.coordinator.data or {}, self.level)
 
     @property
     def native_min_value(self) -> float:
-        return self.range.minimum if self.range else 0
+        return display_range(self.level, self.range).minimum if self.range else 0
 
     @property
     def native_max_value(self) -> float:
-        return self.range.maximum if self.range else 0
+        return display_range(self.level, self.range).maximum if self.range else 0
 
     @property
     def native_value(self) -> float | None:
         rng = self.range
-        return to_db(self.coordinator.data[self.level.field], rng) if rng else None
+        return to_display(self.coordinator.data[self.level.field], self.level, rng) if rng else None
 
     async def async_set_native_value(self, value: float) -> None:
         rng = self.range
         if rng is None:
             return
-        await self.coordinator.async_set_settings({self.level.field: to_raw(value, rng)})
+        await self.coordinator.async_set(
+            self.level.message, {self.level.field: to_raw(value, self.level, rng)}
+        )
